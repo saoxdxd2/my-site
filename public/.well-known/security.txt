@@ -1,0 +1,6 @@
+Contact: mailto:contact@example.com
+Preferred-Languages: en
+Expires: 2026-09-25T00:00:00Z
+Canonical: https://example.com/.well-known/security.txt
+# Optional: link to your public security policy page (update if you have one)
+# Policy: https://example.com/security

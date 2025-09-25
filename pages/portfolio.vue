@@ -1,0 +1,387 @@
+<template>
+  <div>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary-600 to-primary-800 text-white section-padding">
+      <div class="container-max text-center">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-6">Our Portfolio</h1>
+        <p class="text-xl text-primary-100 max-w-3xl mx-auto">
+          Discover the success stories and innovative solutions we've delivered for our clients.
+        </p>
+      </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="section-padding bg-secondary-50">
+      <div class="container-max">
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button
+            v-for="category in categories"
+            :key="category"
+            @click="activeFilter = category"
+            class="px-6 py-3 rounded-full font-medium transition-all duration-200"
+            :class="activeFilter === category 
+              ? 'bg-primary-600 text-white shadow-lg' 
+              : 'bg-white text-secondary-600 hover:bg-primary-50 hover:text-primary-600'"
+          >
+            {{ category }}
+          </button>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            v-for="project in filteredProjects"
+            :key="project.id"
+            class="card hover-lift cursor-pointer group"
+            @click="openModal(project)"
+          >
+            <div class="aspect-video bg-gradient-to-br rounded-lg mb-6 overflow-hidden"
+                 :class="project.gradient">
+              <div class="w-full h-full flex items-center justify-center text-white text-lg font-semibold">
+                {{ project.title }}
+              </div>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+                {{ project.category }}
+              </span>
+              <span class="text-sm text-secondary-500">{{ project.year }}</span>
+            </div>
+            <h3 class="text-xl font-heading font-semibold text-secondary-900 mb-3 group-hover:text-primary-600 transition-colors duration-200">
+              {{ project.title }}
+            </h3>
+            <p class="text-secondary-600 mb-4">{{ project.description }}</p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                v-for="tech in project.technologies"
+                :key="tech"
+                class="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="section-padding">
+      <div class="container-max">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-heading font-bold text-secondary-900 mb-4">
+            Results That Matter
+          </h2>
+          <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+            Our work speaks for itself through measurable outcomes and client success.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div v-for="stat in stats" :key="stat.label" class="card">
+            <div class="text-3xl md:text-4xl font-bold text-primary-600 mb-2">{{ stat.value }}</div>
+            <div class="text-secondary-600">{{ stat.label }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding bg-secondary-50">
+      <div class="container-max">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-heading font-bold text-secondary-900 mb-4">
+            Client Testimonials
+          </h2>
+          <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+            Hear what our clients have to say about working with us.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div v-for="testimonial in testimonials" :key="testimonial.name" class="card">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full mr-4"></div>
+              <div>
+                <h4 class="font-semibold text-secondary-900">{{ testimonial.name }}</h4>
+                <p class="text-sm text-secondary-600">{{ testimonial.role }}, {{ testimonial.company }}</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <svg v-for="i in 5" :key="i" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+            <p class="text-secondary-600 italic">"{{ testimonial.quote }}"</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding bg-primary-600 text-white">
+      <div class="container-max text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Ready to Start Your Project?</h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+          Let's create something amazing together. Contact us to discuss your vision.
+        </p>
+        <NuxtLink to="/contact" class="btn bg-white text-primary-600 hover:bg-primary-50">
+          Start Your Project
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- Project Modal -->
+    <Teleport to="body">
+      <div v-if="selectedProject" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50" @click="closeModal">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" @click.stop>
+          <div class="p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-heading font-bold text-secondary-900">{{ selectedProject.title }}</h2>
+              <button @click="closeModal" class="w-8 h-8 bg-secondary-100 rounded-full flex items-center justify-center hover:bg-secondary-200 transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div class="aspect-video bg-gradient-to-br rounded-lg mb-6"
+                 :class="selectedProject.gradient">
+              <div class="w-full h-full flex items-center justify-center text-white text-2xl font-semibold">
+                {{ selectedProject.title }}
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="md:col-span-2">
+                <h3 class="text-lg font-semibold text-secondary-900 mb-4">Project Overview</h3>
+                <p class="text-secondary-600 mb-6">{{ selectedProject.fullDescription }}</p>
+                
+                <h3 class="text-lg font-semibold text-secondary-900 mb-4">Key Features</h3>
+                <ul class="space-y-2 mb-6">
+                  <li v-for="feature in selectedProject.features" :key="feature" class="flex items-center text-secondary-600">
+                    <svg class="w-4 h-4 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    {{ feature }}
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="text-lg font-semibold text-secondary-900 mb-4">Project Details</h3>
+                <div class="space-y-4">
+                  <div>
+                    <span class="text-sm font-medium text-secondary-700">Category:</span>
+                    <p class="text-secondary-600">{{ selectedProject.category }}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm font-medium text-secondary-700">Year:</span>
+                    <p class="text-secondary-600">{{ selectedProject.year }}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm font-medium text-secondary-700">Duration:</span>
+                    <p class="text-secondary-600">{{ selectedProject.duration }}</p>
+                  </div>
+                  <div>
+                    <span class="text-sm font-medium text-secondary-700">Technologies:</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      <span
+                        v-for="tech in selectedProject.technologies"
+                        :key="tech"
+                        class="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded"
+                      >
+                        {{ tech }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+  </div>
+</template>
+
+<script setup>
+useSeoMeta({
+  title: 'Portfolio',
+  description: 'Explore our portfolio of successful projects and client solutions across various industries.'
+})
+
+const activeFilter = ref('All Projects')
+const selectedProject = ref(null)
+
+const categories = ['All Projects', 'Web Development', 'Digital Marketing', 'Brand Design', 'E-commerce', 'Mobile Apps']
+
+const projects = [
+  {
+    id: 1,
+    title: 'TechCorp Website Redesign',
+    category: 'Web Development',
+    year: '2024',
+    duration: '8 weeks',
+    description: 'Complete website overhaul with modern design and improved user experience.',
+    fullDescription: 'A comprehensive redesign of TechCorp\'s corporate website, focusing on modern aesthetics, improved user experience, and mobile responsiveness. The project included user research, wireframing, design system creation, and full development.',
+    gradient: 'from-blue-500 to-purple-600',
+    technologies: ['Vue.js', 'Nuxt.js', 'Tailwind CSS', 'Node.js'],
+    features: [
+      'Responsive design across all devices',
+      'Improved page load speeds by 60%',
+      'Modern component-based architecture',
+      'SEO optimization and analytics integration',
+      'Content management system integration'
+    ]
+  },
+  {
+    id: 2,
+    title: 'E-commerce Platform',
+    category: 'E-commerce',
+    year: '2024',
+    duration: '12 weeks',
+    description: 'Full-featured online store with payment processing and inventory management.',
+    fullDescription: 'Development of a complete e-commerce solution including product catalog, shopping cart, payment processing, order management, and customer accounts. Built with scalability and performance in mind.',
+    gradient: 'from-green-500 to-teal-600',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'AWS'],
+    features: [
+      'Secure payment processing',
+      'Real-time inventory tracking',
+      'Customer account management',
+      'Admin dashboard for order management',
+      'Mobile-optimized shopping experience'
+    ]
+  },
+  {
+    id: 3,
+    title: 'Brand Identity Package',
+    category: 'Brand Design',
+    year: '2023',
+    duration: '6 weeks',
+    description: 'Complete brand identity including logo, guidelines, and marketing materials.',
+    fullDescription: 'Comprehensive brand identity development for a startup, including logo design, color palette, typography, brand guidelines, business cards, letterheads, and digital assets.',
+    gradient: 'from-pink-500 to-rose-600',
+    technologies: ['Adobe Creative Suite', 'Figma', 'Sketch'],
+    features: [
+      'Logo design and variations',
+      'Comprehensive brand guidelines',
+      'Business card and stationery design',
+      'Social media templates',
+      'Brand application examples'
+    ]
+  },
+  {
+    id: 4,
+    title: 'Digital Marketing Campaign',
+    category: 'Digital Marketing',
+    year: '2024',
+    duration: '16 weeks',
+    description: 'Multi-channel marketing campaign that increased leads by 300%.',
+    fullDescription: 'Strategic digital marketing campaign combining SEO, PPC, social media marketing, and content marketing to drive qualified leads and increase brand awareness for a B2B software company.',
+    gradient: 'from-orange-500 to-red-600',
+    technologies: ['Google Ads', 'Facebook Ads', 'HubSpot', 'Google Analytics'],
+    features: [
+      'SEO optimization and content strategy',
+      'PPC campaign management',
+      'Social media marketing',
+      'Email marketing automation',
+      'Comprehensive analytics and reporting'
+    ]
+  },
+  {
+    id: 5,
+    title: 'Mobile Banking App',
+    category: 'Mobile Apps',
+    year: '2023',
+    duration: '20 weeks',
+    description: 'Secure mobile banking application with biometric authentication.',
+    fullDescription: 'Development of a secure mobile banking application featuring account management, money transfers, bill payments, and investment tracking. Implemented with bank-grade security and biometric authentication.',
+    gradient: 'from-indigo-500 to-blue-600',
+    technologies: ['React Native', 'Node.js', 'PostgreSQL', 'AWS', 'Biometric APIs'],
+    features: [
+      'Biometric authentication',
+      'Real-time transaction notifications',
+      'Account balance and history',
+      'Money transfer capabilities',
+      'Investment portfolio tracking'
+    ]
+  },
+  {
+    id: 6,
+    title: 'Restaurant Chain Website',
+    category: 'Web Development',
+    year: '2023',
+    duration: '10 weeks',
+    description: 'Multi-location restaurant website with online ordering system.',
+    fullDescription: 'Custom website development for a restaurant chain featuring location finder, online menu, ordering system, and reservation management. Integrated with POS systems and delivery platforms.',
+    gradient: 'from-yellow-500 to-orange-600',
+    technologies: ['WordPress', 'WooCommerce', 'PHP', 'MySQL'],
+    features: [
+      'Multi-location management',
+      'Online ordering system',
+      'Table reservation system',
+      'Menu management',
+      'Integration with delivery platforms'
+    ]
+  }
+]
+
+const stats = [
+  { value: '150+', label: 'Projects Completed' },
+  { value: '98%', label: 'Client Satisfaction' },
+  { value: '250%', label: 'Average ROI Increase' },
+  { value: '24/7', label: 'Support Available' }
+]
+
+const testimonials = [
+  {
+    name: 'Sarah Johnson',
+    role: 'CEO',
+    company: 'TechCorp',
+    quote: 'The team delivered exceptional results that exceeded our expectations. Our website traffic increased by 200% within the first month.'
+  },
+  {
+    name: 'Michael Chen',
+    role: 'Marketing Director',
+    company: 'GrowthCo',
+    quote: 'Professional, responsive, and results-driven. They helped us achieve our digital marketing goals ahead of schedule.'
+  },
+  {
+    name: 'Emily Rodriguez',
+    role: 'Founder',
+    company: 'StartupXYZ',
+    quote: 'From concept to launch, they guided us every step of the way. The final product was exactly what we envisioned.'
+  }
+]
+
+const filteredProjects = computed(() => {
+  if (activeFilter.value === 'All Projects') {
+    return projects
+  }
+  return projects.filter(project => project.category === activeFilter.value)
+})
+
+const openModal = (project) => {
+  selectedProject.value = project
+}
+
+const closeModal = () => {
+  selectedProject.value = null
+}
+
+// Close modal on escape key
+onMounted(() => {
+  const handleEscape = (e) => {
+    if (e.key === 'Escape') {
+      closeModal()
+    }
+  }
+  
+  document.addEventListener('keydown', handleEscape)
+  
+  onUnmounted(() => {
+    document.removeEventListener('keydown', handleEscape)
+  })
+})
+</script>
