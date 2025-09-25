@@ -1,0 +1,2 @@
+import{ssrRenderAttrs as e,ssrRenderSlot as o}from"vue/server-renderer";import{useSSRContext as r}from"vue";import{o as s}from"./_plugin-vue_export-helper-BCo6x5W8.mjs";const t={},u=t.setup;t.setup=(e,o)=>{const s=r();return(s.modules||(s.modules=new Set)).add("node_modules/@nuxtjs/mdc/dist/runtime/components/prose/ProseEm.vue"),u?u(e,o):void 0};const m=s(t,[["ssrRender",function(r,s,t,u){s(`<em${e(u)}>`),o(r.$slots,"default",{},null,s,t),s("</em>")}]]);export{m as default};
+//# sourceMappingURL=ProseEm-MG_x9Q8i.mjs.map

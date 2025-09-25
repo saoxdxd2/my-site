@@ -1,0 +1,2 @@
+import{ssrRenderAttrs as e}from"vue/server-renderer";import{useSSRContext as r}from"vue";import{o}from"./_plugin-vue_export-helper-BCo6x5W8.mjs";const s={},t=s.setup;s.setup=(e,o)=>{const s=r();return(s.modules||(s.modules=new Set)).add("node_modules/@nuxtjs/mdc/dist/runtime/components/prose/ProseHr.vue"),t?t(e,o):void 0};const n=o(s,[["ssrRender",function(r,o,s,t){o(`<hr${e(t)}>`)}]]);export{n as default};
+//# sourceMappingURL=ProseHr-CIoqSIDH.mjs.map

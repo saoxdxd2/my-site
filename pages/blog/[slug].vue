@@ -145,7 +145,7 @@ const route = useRoute()
 const slug = route.params.slug
 
 // Fetch the current post
-const { data: post } = await queryContent(`/blog/${slug}`).findOne()
+const post = await queryContent(`/blog/${slug}`).findOne()
 
 if (!post) {
   throw createError({
@@ -155,7 +155,7 @@ if (!post) {
 }
 
 // Fetch related posts
-const { data: allPosts } = await queryContent('/blog').sort({ date: -1 }).find()
+const allPosts = await queryContent('/blog').sort({ date: -1 }).find()
 const relatedPosts = allPosts
   .filter(p => p._path !== post._path && p.category === post.category)
   .slice(0, 3)

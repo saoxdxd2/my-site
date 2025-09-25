@@ -1,0 +1,1 @@
+{"version":3,"file":"mdc-configs.mjs","sources":["../../../../.nuxt/mdc-configs.mjs"],"sourcesContent":null,"names":["configs","getMdcConfigs","Promise","all"],"mappings":"AAAA,IAAIA,EACG,SAASC,gBAKhB,OAJKD,IACHA,EAAUE,QAAQC,IAAI,KAGjBH,CACP"}

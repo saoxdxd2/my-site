@@ -1,0 +1,2 @@
+import{defineComponent as e,h as n,useSSRContext as o}from"vue";const t=e({name:"DocumentDrivenNotFound",render:()=>n("div","Document not found")}),u=t.setup;t.setup=(e,n)=>{const t=o();return(t.modules||(t.modules=new Set)).add("node_modules/@nuxt/content/dist/runtime/components/DocumentDrivenNotFound.vue"),u?u(e,n):void 0};export{t as default};
+//# sourceMappingURL=DocumentDrivenNotFound-BfhmgZ0n.mjs.map

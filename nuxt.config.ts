@@ -21,7 +21,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    // Enable content module for blog pages (queryContent/ContentRenderer)
+    '@nuxt/content'
   ],
   
   // SEO Configuration moved to runtimeConfig

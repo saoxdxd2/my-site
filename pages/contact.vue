@@ -244,7 +244,8 @@ const form = ref({
 })
 
 const submitting = ref(false)
-const toast = useToast()
+// SSR-safe toast instance to avoid errors during prerender
+const toast = process.client ? useToast() : { success: () => {}, error: () => {} }
 
 const contactInfo = [
   {

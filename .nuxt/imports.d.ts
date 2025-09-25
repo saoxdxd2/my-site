@@ -42,4 +42,12 @@ export { formatDate, calculateReadingTime, generateSlug, truncateText, titleCase
 export { detectImageFormatSupport, generateOptimizedSources, createResponsiveSrcset, calculateOptimalDimensions, ImageOptimizationOptions } from '../utils/imageOptimization';
 export { useLazyImages, preloadCriticalResources, debounce, throttle } from '../utils/performance';
 export { generateStructuredData, generateMetaTags, generateCanonicalUrl, generateBreadcrumbData, useSEO, SEOData } from '../utils/seo';
-export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
+export { queryContent } from '../node_modules/@nuxt/content/dist/runtime/legacy/composables/query';
+export { useContentHelpers } from '../node_modules/@nuxt/content/dist/runtime/composables/helpers';
+export { useContentHead } from '../node_modules/@nuxt/content/dist/runtime/composables/head';
+export { useContentPreview } from '../node_modules/@nuxt/content/dist/runtime/composables/preview';
+export { withContentBase, useContentDisabled as useContentState, useContentDisabled as useContent } from '../node_modules/@nuxt/content/dist/runtime/composables/utils';
+export { useUnwrap } from '../node_modules/@nuxt/content/dist/runtime/composables/useUnwrap';
+export { fetchContentNavigation } from '../node_modules/@nuxt/content/dist/runtime/legacy/composables/navigation';
+export { flatUnwrap as unwrapSlot } from '../node_modules/@nuxtjs/mdc/dist/runtime/utils/node';
+export { parseMarkdown } from '../node_modules/@nuxtjs/mdc/dist/runtime/parser';

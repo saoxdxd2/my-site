@@ -149,8 +149,8 @@ const email = ref('')
 const postsPerPage = 9
 const currentPage = ref(1)
 
-// Fetch blog posts with error handling
-const { data: posts } = await queryContent('/blog').sort({ date: -1 }).find().catch(() => ({ data: [] })) || []
+// Fetch blog posts with error handling (Nuxt Content v2 returns array)
+const posts = await queryContent('/blog').sort({ date: -1 }).find().catch(() => [])
 
 // Fallback sample data if no content found
 const samplePosts = [

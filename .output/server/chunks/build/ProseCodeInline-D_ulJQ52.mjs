@@ -1,0 +1,2 @@
+import{ssrRenderAttrs as e,ssrRenderSlot as o}from"vue/server-renderer";import{useSSRContext as t}from"vue";import{o as r}from"./_plugin-vue_export-helper-BCo6x5W8.mjs";const n={},s=n.setup;n.setup=(e,o)=>{const r=t();return(r.modules||(r.modules=new Set)).add("node_modules/@nuxt/content/dist/runtime/components/Prose/ProseCodeInline.vue"),s?s(e,o):void 0};const u=r(n,[["ssrRender",function(t,r,n,s){r(`<code${e(s)}>`),o(t.$slots,"default",{},null,r,n),r("</code>")}]]);export{u as default};
+//# sourceMappingURL=ProseCodeInline-D_ulJQ52.mjs.map
